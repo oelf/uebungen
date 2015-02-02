@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navdrawer"
+    android:layout_width="@dimen/navdrawer_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/navdrawer_background"
+    android:clickable="true"
+    android:elevation="10dp"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <ScrollView
+        android:id="@+id/navDrawerScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/navDrawerLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <!-- Image Header-->
+
+            <LinearLayout
+                android:id="@+id/ltDrawerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:background="@drawable/img_navdrawerheader"
+                android:gravity="left|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/imgDrawerHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:adjustViewBounds="true"
+                    android:fontFamily="sans-serif"
+                    android:gravity="bottom"
+                    android:paddingLeft="16dp"
+                    android:src="@drawable/img_navdrawerheader"
+                    android:text="Übungen"
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
+
+                <!-- Slogan -->
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/txtNavSlogan"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif"
+                    android:paddingLeft="16dp"
+                    android:text="Die Fitnessbibel 2go, yo!"
+                    android:textColor="#E9E9E9"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#888" />
+
+            <LinearLayout
+                android:id="@+id/mainNavDrawer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

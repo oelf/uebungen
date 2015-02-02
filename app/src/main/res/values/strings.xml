@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Übungen</string>
+    <string name="action_settings">Hilfe</string>
+    <string name="font_fontFamily_medium">sans-serif</string>
+
+    <string-array name="arrTabs">
+        <item>Übersicht</item>
+        <item>Erklärung</item>
+        <item>Ausführung</item>
+        <item>Häufige Fehler</item>
+    </string-array>
+
+</resources>

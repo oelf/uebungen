@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Button -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/txtNavButtonBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/txtNavButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/txtNavButtonImage"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/ic_nav_hantel" />
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:id="@+id/txtNavButtonText"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:editable="false"
+            android:elegantTextHeight="false"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            android:fontFamily="sans-serif"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="25dp"
+            android:singleLine="false"
+            android:text="Home"
+            android:textColor="@color/colorText"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout><!-- /BUTTON -->
