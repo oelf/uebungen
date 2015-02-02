@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DBMain extends SQLiteOpenHelper {
-    private static String DB_PATH= "data/data/huti.material/databases/";
+    private static String DB_PATH= "data/data/oelf.uebungen/databases/";
     private static String DB_NAME = "uebungen";
     private SQLiteDatabase dbObj;
     private final Context context;
