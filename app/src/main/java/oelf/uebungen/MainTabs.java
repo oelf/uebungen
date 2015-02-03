@@ -6,8 +6,6 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 
 /**
  * The {@link android.support.v4.view.PagerAdapter} used to display pages in this sample.
@@ -78,13 +76,7 @@ class MainTabs extends PagerAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(this.context);
 
-        View view = inflater.inflate(R.layout.pager_item,
-                container, false);
-
-        //TextView txt = (TextView) view.findViewById(R.id.item_subtitle);
-        //txt.setText("AppContent: " + (position + 1));
-
-        //this.getPageContent(view, position);
+        View view = inflater.inflate(R.layout.pager_item, container, false);
 
         // Add the newly created View to the ViewPager
         container.addView(view);
@@ -110,11 +102,9 @@ class MainTabs extends PagerAdapter {
         int position = 0;
         for (int i = 0; i < views.size(); i++) {
             position = views.keyAt(i);
+
             View view = views.get(position);
             // Change the content of this view
-            //TextView txt = (TextView) view.findViewById(R.id.item_subtitle);
-            //txt.setText("This Page " + (position + 1) + " has been refreshed");
-
             this.getPageContent(view, position, 0);
         }
         super.notifyDataSetChanged();
@@ -124,11 +114,9 @@ class MainTabs extends PagerAdapter {
         int position = 0;
         for (int i = 0; i < views.size(); i++) {
             position = views.keyAt(i);
+
             View view = views.get(position);
             // Change the content of this view
-            //TextView txt = (TextView) view.findViewById(R.id.item_subtitle);
-            //txt.setText("This Page " + (position + 1) + " has been refreshed");
-
             this.getPageContent(view, position, arr[i]);
         }
         super.notifyDataSetChanged();

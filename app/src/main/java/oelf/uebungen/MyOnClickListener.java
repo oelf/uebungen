@@ -29,12 +29,15 @@ public class MyOnClickListener implements View.OnClickListener {
             View nextView = container.getChildAt(container.indexOfChild(v) + 1);
 
             if (((ViewGroup) nextView).getChildCount() > 0) {
+
                 if (nextView.getVisibility() == View.GONE) {
                     nextView.setVisibility(View.VISIBLE);
                 } else {
                     nextView.setVisibility(View.GONE);
                 }
+
             } else {
+
                 // close drawer if you want
                 if (this.drawerLayout.isDrawerOpen(Gravity.START | Gravity.LEFT)) {
                     this.drawerLayout.closeDrawers();
@@ -42,6 +45,7 @@ public class MyOnClickListener implements View.OnClickListener {
 
                 // update loaded Views if you want
                 MainTabs adapter = (MainTabs) this.viewPager.getAdapter();
+
                 int[] arrViews = new int[]{myTag.idkategorie, 0, 0, 0};
                 adapter.notifyDataSetChanged(arrViews);
 
@@ -49,6 +53,7 @@ public class MyOnClickListener implements View.OnClickListener {
             }
         } else if (myTag.source.equals("uebung")) {
             MainTabs adapter = (MainTabs) this.viewPager.getAdapter();
+
             int[] arrViews = new int[]{0, myTag.idkategorie, 1, 1};
             adapter.notifyDataSetChanged(arrViews);
 

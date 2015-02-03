@@ -1,16 +1,12 @@
 package oelf.uebungen;
 
-
 import android.content.res.Resources;
-import android.graphics.Interpolator;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -19,13 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 import SlidingTabs.SlidingTabLayout;
 
@@ -74,9 +68,7 @@ public class MainActivity extends ActionBarActivity {
                 ((LinearLayout.LayoutParams) ((LinearLayout) navButton.findViewById(R.id.txtNavButton)).getLayoutParams()).setMargins(marginLeft, 0, 0, 0);
 
                 layout.addView(navButton);
-                //this.insertPoint.addView(navButton);
 
-                //this.zeigeMenue(tiefe+1, idkategorie);
                 counter++;
             }
 
@@ -145,19 +137,15 @@ public class MainActivity extends ActionBarActivity {
         if (mSlidingTabLayout != null) {
             mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
-                public void onPageScrolled(int position, float positionOffset,
-                                           int positionOffsetPixels) {
-
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 }
 
                 @Override
                 public void onPageSelected(int position) {
-
                 }
 
                 @Override
                 public void onPageScrollStateChanged(int state) {
-
                 }
             });
         }

@@ -5,21 +5,23 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DBMain extends SQLiteOpenHelper {
-    private static String DB_PATH= "data/data/oelf.uebungen/databases/";
-    private static String DB_NAME = "uebungen";
+    private static String DB_PATH  = Config.DATABASE_PATH;
+    private static String DB_NAME = Config.DATABASE_NAME;
     private SQLiteDatabase dbObj;
     private final Context context;
 
     public DBMain(Context context) {
-        super(context,  DB_NAME , null, 3);
-        this. context  = context;
-    }
+        super(context, DB_NAME, null, 3);
+
+        this.context = context;
+  }
 
     public void createDB() throws IOException {
         this.getReadableDatabase();
@@ -31,23 +33,21 @@ public class DBMain extends SQLiteOpenHelper {
         }
     }
 
-    public void copyDB() throws IOException{
+    public void copyDB() throws IOException {
         try {
-            InputStream ip =  context.getAssets().open(DB_NAME+".db");
-            String op=  DB_PATH  +  DB_NAME ;
-            OutputStream output = new FileOutputStream( op);
+            InputStream ip = context.getAssets().open(DB_NAME + ".db");
+            String op = DB_PATH + DB_NAME;
+            OutputStream output = new FileOutputStream(op);
             byte[] buffer = new byte[1024];
 
             int length;
-            while ((length = ip.read(buffer))>0){
+            while ((length = ip.read(buffer)) > 0) {
                 output.write(buffer, 0, length);
             }
             output.flush();
             output.close();
             ip.close();
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.v("error", e.toString());
         }
     }
@@ -59,8 +59,9 @@ public class DBMain extends SQLiteOpenHelper {
 
     @Override
     public synchronized void close() {
-        if(dbObj != null)
+        if (dbObj != null) {
             dbObj.close();
+        }
 
         super.close();
     }

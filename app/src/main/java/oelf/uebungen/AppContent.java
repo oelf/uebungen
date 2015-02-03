@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AppContent {
     private static ActionBarActivity sActivity;
