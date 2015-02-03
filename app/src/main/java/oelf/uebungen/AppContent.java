@@ -2,9 +2,11 @@ package oelf.uebungen;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,7 +24,7 @@ public class AppContent {
         sClickListener = new MyOnClickListener(sViewPager);
     }
 
-    public static void showErklaerung(View view, int iduebung) {
+    public static void showText(View view, int iduebung, int idAttribut) {
         LinearLayout lay = new LinearLayout(view.getContext());
         lay.setOrientation(LinearLayout.VERTICAL);
 
@@ -35,8 +37,25 @@ public class AppContent {
 
         sActivity.getSupportActionBar().setSubtitle(bezeichnung);
 
+        String attribut = "";
+        switch (idAttribut) {
+            case 1:
+                attribut = "erklaerung";
+                break;
+            case 2:
+                attribut = "ausfuehrung";
+                break;
+            case 3:
+                attribut = "fehler";
+                break;
+        }
+        sql = "SELECT " + attribut + " FROM texte WHERE iduebung = " + iduebung;
+        c = sDb.rawQuery(sql, null);
+        c.moveToFirst();
+        String text = c.getString(c.getColumnIndex(attribut));
+
         TextView txtContent = (TextView) txtItem.findViewById(R.id.txtContent);
-        txtContent.setText("Inhalt");
+        txtContent.setText(text);
 
         lay.addView(txtItem);
 
@@ -49,7 +68,7 @@ public class AppContent {
         LinearLayout lay = new LinearLayout(view.getContext());
         lay.setOrientation(LinearLayout.VERTICAL);
 
-        String sql = "SELECT iduebung, bezeichnung, equipment, schwierigkeit FROM uebungen WHERE idkategorie = " + idkategorie;
+        String sql = "SELECT iduebung,bild, bezeichnung, equipment, schwierigkeit FROM uebungen WHERE idkategorie = " + idkategorie;
         Cursor c = sDb.rawQuery(sql, null);
         if (c.getCount() > 0) {
             while (c.moveToNext()) {
@@ -58,11 +77,15 @@ public class AppContent {
                 String bezeichnung = c.getString(c.getColumnIndex("bezeichnung"));
                 String equipment = c.getString(c.getColumnIndex("equipment"));
                 String schwierigkeit = c.getString(c.getColumnIndex("schwierigkeit"));
+                byte[] bild = c.getBlob(c.getColumnIndex("bild"));
 
                 View uebungItem = sActivity.getLayoutInflater().inflate(R.layout.uebung_item, null);
 
                 TextView txtBezeichung = (TextView) uebungItem.findViewById(R.id.txtTitel);
                 txtBezeichung.setText(bezeichnung);
+
+                ImageView imgView = (ImageView) uebungItem.findViewById(R.id.imgView);
+                imgView.setImageBitmap(BitmapFactory.decodeByteArray(bild, 0, bild.length));
 
                 TextView txtEquipment = (TextView) uebungItem.findViewById(R.id.txtEquipment);
                 txtEquipment.setText(txtEquipment.getText() + equipment);

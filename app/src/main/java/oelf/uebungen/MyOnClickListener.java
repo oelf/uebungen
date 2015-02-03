@@ -54,7 +54,7 @@ public class MyOnClickListener implements View.OnClickListener {
         } else if (myTag.source.equals("uebung")) {
             MainTabs adapter = (MainTabs) this.viewPager.getAdapter();
 
-            int[] arrViews = new int[]{0, myTag.idkategorie, 1, 1};
+            int[] arrViews = new int[]{0, myTag.idkategorie, myTag.idkategorie, myTag.idkategorie};
             adapter.notifyDataSetChanged(arrViews);
 
             this.viewPager.setCurrentItem(1, true);

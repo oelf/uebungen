@@ -30,8 +30,8 @@ class MainTabs extends PagerAdapter {
                 case 0:
                     AppContent.showUebungen(view, idkategorie);
                     break;
-                case 1:
-                    AppContent.showErklaerung(view, idkategorie);
+                default:
+                    AppContent.showText(view, idkategorie, key);
                     break;
             }
         }
