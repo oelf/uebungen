@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class AppContent {
     private static ActionBarActivity sActivity;
     private static SQLiteDatabase sDb;
-    private static View.OnClickListener meinClickListener;
+    private static MyOnClickListener sClickListener;
     private static ViewPager sViewPager;
 
     public static void init(ActionBarActivity activity, SQLiteDatabase db, ViewPager mViewPager) {
@@ -20,19 +20,7 @@ public class AppContent {
         sDb = db;
         sViewPager = mViewPager;
 
-        meinClickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                MyTag myTag = (MyTag) v.getTag();
-
-                MainTabs adapter = (MainTabs) sViewPager.getAdapter();
-                int[] arrViews = new int[]{0, myTag.idkategorie, 1, 1};
-                adapter.notifyDataSetChanged(arrViews);
-
-                sViewPager.setCurrentItem(1, true);
-            }
-        };
+        sClickListener = new MyOnClickListener(sViewPager);
     }
 
     public static void showErklaerung(View view, int iduebung) {
@@ -46,8 +34,7 @@ public class AppContent {
         c.moveToFirst();
         String bezeichnung = c.getString(c.getColumnIndex("bezeichnung"));
 
-        TextView txtTitel = (TextView) txtItem.findViewById(R.id.txtTitel);
-        txtTitel.setText(bezeichnung);
+        sActivity.getSupportActionBar().setSubtitle(bezeichnung);
 
         TextView txtContent = (TextView) txtItem.findViewById(R.id.txtContent);
         txtContent.setText("Inhalt");
@@ -84,8 +71,8 @@ public class AppContent {
                 TextView txtSchwierigkeit = (TextView) uebungItem.findViewById(R.id.txtSchwierigkeit);
                 txtSchwierigkeit.setText(txtSchwierigkeit.getText() + schwierigkeit);
 
-                uebungItem.setTag(new MyTag(iduebung));
-                uebungItem.setOnClickListener(meinClickListener);
+                uebungItem.setTag(new MyTag("uebung", iduebung));
+                uebungItem.setOnClickListener(sClickListener);
 
                 lay.addView(uebungItem);
             }

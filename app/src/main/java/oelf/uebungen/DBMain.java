@@ -24,10 +24,8 @@ public class DBMain extends SQLiteOpenHelper {
     public void createDB() throws IOException {
         this.getReadableDatabase();
 
-        Log.i("Readable ends....................","end");
         try {
             copyDB();
-            Log.i("copy db ends....................","end");
         } catch (IOException e) {
             throw new Error("Error copying database");
         }
@@ -35,10 +33,7 @@ public class DBMain extends SQLiteOpenHelper {
 
     public void copyDB() throws IOException{
         try {
-            Log.i("inside copyDB....................","start");
-
             InputStream ip =  context.getAssets().open(DB_NAME+".db");
-            Log.i("Input Stream....",ip+"");
             String op=  DB_PATH  +  DB_NAME ;
             OutputStream output = new FileOutputStream( op);
             byte[] buffer = new byte[1024];
@@ -46,7 +41,6 @@ public class DBMain extends SQLiteOpenHelper {
             int length;
             while ((length = ip.read(buffer))>0){
                 output.write(buffer, 0, length);
-                Log.i("AppContent.... ",length+"");
             }
             output.flush();
             output.close();
@@ -61,7 +55,6 @@ public class DBMain extends SQLiteOpenHelper {
     public void openDB() throws SQLException {
         String myPath = DB_PATH + DB_NAME;
         dbObj = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-        Log.i("open DB......",dbObj.toString());
     }
 
     @Override

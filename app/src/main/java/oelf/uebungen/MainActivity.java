@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     private static String DB_NAME = "uebungen.db";
     private SQLiteDatabase db1;
     private ViewGroup insertPoint;
-    private View.OnClickListener meinClickListener;
+    private MyOnClickListener clickListener;
 
     private LinearLayout zeigeMenue(int tiefe, int idknotenSuche) {
         Cursor c = this.db1.rawQuery("SELECT idkategorie, bezeichnung, idknoten FROM kategorien WHERE idknoten=" + idknotenSuche + " ORDER BY idknoten, idkategorie", null);
@@ -61,9 +61,9 @@ public class MainActivity extends ActionBarActivity {
                 int idkategorie = c.getInt(c.getColumnIndex("idkategorie"));
 
                 View navButton = getLayoutInflater().inflate(R.layout.menuitem, null);
-                navButton.setTag(new MyTag(idkategorie, idknoten));
+                navButton.setTag(new MyTag("kategorie", idkategorie, idknoten));
                 ((TextView) navButton.findViewById(R.id.txtNavButtonText)).setText(bezeichnung);
-                navButton.setOnClickListener(this.meinClickListener);
+                navButton.setOnClickListener(this.clickListener);
 
                 int marginLeft = 0;
                 if (tiefe > 0) {
@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
 
             for (int i = 0; i < counter * 2; i += 2) {
                 MyTag myTag = (MyTag) layout.getChildAt(i).getTag();
-                layout.setTag(new MyTag(myTag.idknoten, 0));
+                layout.setTag(new MyTag("kategorie", myTag.idknoten, 0));
 
                 layout.addView(this.zeigeMenue(tiefe + 1, myTag.idkategorie), i + 1);
             }
@@ -95,7 +95,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         DBMain db;
         db = new DBMain(this);
@@ -111,43 +110,8 @@ public class MainActivity extends ActionBarActivity {
             throw sqle;
         }
 
-        // Click events for Navigation Drawer
-        this.meinClickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                MyTag myTag = (MyTag) v.getTag();
-
-                ViewGroup container = (ViewGroup) v.getParent();
-                View nextView = container.getChildAt(container.indexOfChild(v) + 1);
-
-                if (((ViewGroup) nextView).getChildCount() > 0) {
-                    if (nextView.getVisibility() == View.GONE) {
-                        nextView.setVisibility(View.VISIBLE);
-                    } else {
-                        nextView.setVisibility(View.GONE);
-                    }
-                } else {
-                    // close drawer if you want
-                    if (mDrawerLayout.isDrawerOpen(Gravity.START | Gravity.LEFT)) {
-                        mDrawerLayout.closeDrawers();
-                    }
-                    //Toast.makeText(v.getContext(), "Zeige: "+myTag.idkategorie, Toast.LENGTH_SHORT).show();
-
-                    // update loaded Views if you want
-                    MainTabs adapter = (MainTabs) mViewPager.getAdapter();
-                    int[] arrViews = new int[]{myTag.idkategorie, 0, 0, 0};
-                    adapter.notifyDataSetChanged(arrViews);
-                }
-            }
-        };
-
         this.db1 = openOrCreateDatabase("uebungen", SQLiteDatabase.CREATE_IF_NECESSARY, null);
         this.insertPoint = (ViewGroup) findViewById(R.id.mainNavDrawer);
-
-        LinearLayout layout = this.zeigeMenue(0, 0);
-        this.insertPoint.addView(layout);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -169,6 +133,11 @@ public class MainActivity extends ActionBarActivity {
         mViewPager.setAdapter(new MainTabs(getApplicationContext()));
 
         mSlidingTabLayout.setViewPager(mViewPager);
+
+        this.clickListener = new MyOnClickListener(mViewPager, mDrawerLayout);
+
+        LinearLayout layout = this.zeigeMenue(0, 0);
+        this.insertPoint.addView(layout);
 
         AppContent.init(this, this.db1, mViewPager);
 
