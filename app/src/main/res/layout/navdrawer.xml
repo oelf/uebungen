@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<oelf.uebungen.ScrimInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navdrawer"
     android:layout_width="@dimen/navdrawer_width"
     android:layout_height="match_parent"
@@ -6,6 +7,7 @@
     android:background="@color/navdrawer_background"
     android:clickable="true"
     android:elevation="10dp"
+    app:insetForeground="#4000"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:weightSum="1">
@@ -76,4 +78,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</oelf.uebungen.ScrimInsetsFrameLayout>
